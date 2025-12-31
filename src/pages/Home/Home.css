@@ -1,0 +1,39 @@
+.home-page {
+  padding: 40px 20px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.hero h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.primary-btn.large {
+  padding: 14px 32px;
+  font-size: 16px;
+}
+
+.info {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+.info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.info li {
+  margin: 10px 0;
+  color: var(--text-muted);
+}

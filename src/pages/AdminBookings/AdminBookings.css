@@ -1,0 +1,47 @@
+.admin-bookings {
+  padding: 30px;
+}
+
+.admin-booking-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.admin-booking-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.admin-booking-card h4 {
+  color: #c2185b;
+  margin-bottom: 6px;
+}
+
+
+/* status */
+.status {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}

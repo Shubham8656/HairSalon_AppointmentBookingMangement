@@ -1,0 +1,178 @@
+/* Page */
+.booking-page {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.booking-page h2 {
+  margin-bottom: 24px;
+  color: var(--primary);
+}
+
+.booking-page section {
+  margin-bottom: 32px;
+}
+
+.booking-page h3 {
+  margin-bottom: 14px;
+  font-size: 18px;
+}
+
+/* Loading */
+.page-loading {
+  text-align: center;
+  margin-top: 60px;
+  color: #777;
+}
+
+/* Services */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.service-card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.service-card h4 {
+  margin-bottom: 6px;
+}
+
+.service-card p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.service-card strong {
+  color: #c2185b;
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+}
+
+.service-card.active {
+  border-color: #c2185b;
+  background: #fff6f9;
+}
+
+/* Placeholder text */
+.placeholder {
+  color: #999;
+  font-size: 14px;
+}
+
+/* Buttons */
+.primary-btn {
+  background: #c2185b;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background: #ad1457;
+}
+
+
+/* Stylist Card */
+.stylists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.stylist-card {
+  background: white;
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+}
+
+.stylist-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.stylist-card p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.stylist-card:hover {
+  transform: translateY(-3px);
+}
+
+.stylist-card.active {
+  border-color: #c2185b;
+  background: #fff6f9;
+}
+
+/* css for date input */
+.date-input {
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  max-width: 220px;
+}
+
+.date-input:focus {
+  border-color: #c2185b;
+}
+
+
+/* CSS for TIme Slot */
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 12px;
+}
+
+.time-slot {
+  padding: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.time-slot:hover {
+  border-color: #c2185b;
+}
+
+.time-slot.active {
+  background: #c2185b;
+  color: white;
+  border-color: #c2185b;
+}
+
+/* css for diabled slots */
+.time-slot.disabled {
+  background: #eee;
+  color: #999;
+  border-color: #ddd;
+  cursor: not-allowed;
+}

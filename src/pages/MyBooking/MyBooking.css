@@ -1,0 +1,21 @@
+.my-bookings {
+  padding: 30px;
+}
+
+.booking-list {
+  display: grid;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.booking-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.booking-card h4 {
+  color: #c2185b;
+  margin-bottom: 8px;
+}
