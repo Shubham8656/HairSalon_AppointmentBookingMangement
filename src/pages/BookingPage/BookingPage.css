@@ -65,7 +65,12 @@
   border-color: #c2185b;
   background: #fff6f9;
 }
-
+.service-image {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  object-fit: cover;
+}
 /* Placeholder text */
 .placeholder {
   color: #999;

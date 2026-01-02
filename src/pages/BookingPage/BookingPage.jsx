@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
     collection, getDocs, query, where, addDoc,
-    doc,
+    doc,orderBy,
     serverTimestamp,
     setDoc
 } from "firebase/firestore";
@@ -41,7 +41,7 @@ function BookingPage() {
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const snap = await getDocs(collection(db, "services"));
+                const snap = await getDocs(query(collection(db, "services"),orderBy("id", "asc")));
                 const data = snap.docs
                     .map(doc => ({ id: doc.id, ...doc.data() }))
                     .filter(s => s.active);
@@ -95,11 +95,15 @@ function BookingPage() {
                 const q = query(
                     collection(db, "bookings"),
                     where("stylistId", "==", stylist.id),
-                    where("date", "==", date)
+                    where("date", "==", date),
+                    // where("status", "!=", "Cancelled")
                 );
 
                 const snap = await getDocs(q);
-                const booked = snap.docs.map(doc => doc.data().time);
+                const booked = snap.docs
+                    .map(doc => doc.data())
+                    .filter(b => b.status !== "Cancelled")
+                    .map(b => b.time); // VERY IMPORTANT
 
                 setBookedSlots(booked);
             } catch (err) {
@@ -128,15 +132,11 @@ function BookingPage() {
 
         const [startH, startM] = start.split(":").map(Number);
         const [endH, endM] = end.split(":").map(Number);
-        console.log("startH :", startH);
         let current = new Date();
         current.setHours(startH, startM, 0, 0);
-        console.log("current :", current);
 
         const endTime = new Date();
         endTime.setHours(endH, endM, 0, 0);
-        console.log("endTime :", endTime);
-        console.log("current + duration * 60000 :", current.valueOf());
         while (current.valueOf() + duration * 60000 <= endTime.valueOf()) {
             const hours = current.getHours().toString().padStart(2, "0");
             const minutes = current.getMinutes().toString().padStart(2, "0");
@@ -163,7 +163,8 @@ function BookingPage() {
                 duration: service.duration,
                 date,
                 time,
-                status:"Pending",
+                status: "Pending",
+                image:service.image,
                 createdAt: serverTimestamp(),
             };
 
@@ -218,6 +219,11 @@ function BookingPage() {
                                     setTime(null);
                                 }}
                             >
+                                <img
+                                    src={s.image}
+                                    alt={s.name}
+                                    className="service-image"
+                                />
                                 <h4>{s.name}</h4>
                                 <p>{s.duration} mins</p>
                                 <strong>₹{s.price}</strong>
@@ -276,6 +282,7 @@ function BookingPage() {
                             setTime(null);
                         }}
                     />
+
                 </section>
             )}
 

@@ -49,9 +49,15 @@ function MyBookings() {
           {bookings.map(b => (
             <div key={b.id} className="booking-card">
               <h4>{b.serviceName}</h4>
+              <img
+                src={b.image}
+                alt={b.name}
+                className="service-image"
+              />
               <p><strong>Stylist:</strong> {b.stylistName}</p>
               <p><strong>Date:</strong> {b.date}</p>
               <p><strong>Time:</strong> {b.time}</p>
+              <p><strong>Status:</strong><span className={`status ${b.status.toLowerCase()}`}> {b.status}</span></p>
             </div>
           ))}
         </div>

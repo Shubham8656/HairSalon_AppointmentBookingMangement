@@ -40,7 +40,9 @@ function Header() {
         <Link to="/book" className="book-btn">
           Book Appointment
         </Link>
-
+        <Link to="/admin/bookings" className="book-btn">
+          Admin Dashboard
+        </Link>
         {user && (
           <div className="profile-wrapper" ref={dropdownRef}>
             <img

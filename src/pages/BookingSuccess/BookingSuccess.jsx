@@ -6,7 +6,7 @@ function BookingSuccess() {
     <div className="success-page">
       <div className="success-card">
         <h1>🎉 Booking Confirmed!</h1>
-        <p>Your appointment has been successfully booked.</p>
+        <p>Your appointment has been successfully booked. Please arrive 10 minutes early.</p>
 
         <div className="success-actions">
           <Link to="/book" className="btn-outline">
