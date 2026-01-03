@@ -52,7 +52,7 @@ function AdminBookings() {
         };
 
         fetchBookings();
-    }, []);
+    }, [bookings]);
 
     // Mark complete  
     const markCompleted = async (booking) => {
