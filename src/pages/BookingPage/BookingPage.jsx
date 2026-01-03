@@ -32,7 +32,7 @@ function BookingPage() {
     const stylistRef = useRef(null);
     const dateTimeRef = useRef(null);
     const TimeRef = useRef(null);
-
+    const confirmBookRef = useRef(null);
     /* 🔐 Protect page */
     useEffect(() => {
         if (!loading && !user) {
@@ -332,7 +332,15 @@ function BookingPage() {
                                                     ${time === slot ? "active" : ""}
                                                     ${isBooked ? "disabled" : ""}
                                                 `}
-                                        onClick={() => !isBooked && setTime(slot)}
+                                        onClick={() => {
+                                            !isBooked && setTime(slot)
+                                            setTimeout(() => {
+                                                confirmBookRef.current?.scrollIntoView({
+                                                    behavior: "smooth",
+                                                    block: "start",
+                                                });
+                                            }, 200);
+                                        }}
                                     >
                                         {slot}
                                     </button>
@@ -347,7 +355,7 @@ function BookingPage() {
 
             {/* STEP 5: CONFIRM */}
             {time && (
-                <button
+                <button ref={confirmBookRef}
                     className="primary-btn"
                     onClick={handleBooking}
                 >
