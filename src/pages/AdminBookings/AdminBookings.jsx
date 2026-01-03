@@ -3,7 +3,8 @@ import {
     collection,
     getDocs,
     orderBy,
-    query, doc, updateDoc, deleteDoc
+    query, doc, updateDoc, deleteDoc,
+    where
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import "./AdminBookings.css";
@@ -11,8 +12,10 @@ import "./AdminBookings.css";
 function AdminBookings() {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [stylist, setStylist] = useState(null);
+    const [stylists, setStylists] = useState([]);
     const [statusFilter, setStatusFilter] = useState("All");
+
     const filteredBookings =
         statusFilter === "All"
             ? bookings
@@ -27,13 +30,41 @@ function AdminBookings() {
         { status: "Pending", count: PendingBookings.length },
         { status: "Cancelled", count: CancelledBookings.length }
     ]
-    // Fetch bookings 
+    // Fetch stylists 
+    useEffect(() => {
+        const fetchstylists = async () => {
+            try {
+                const snap = await getDocs(collection(db, "stylists"));
+                console.log("snap ", snap.docs)
+                const data = snap.docs
+                    .map(doc => ({ id: doc.id, ...doc.data() }))
+                    .filter(s =>
+                        s.active
+                    );
+
+                setStylists(data);
+            } catch (err) {
+                console.error("Failed to fetch admin bookings", err);
+            } finally {
+                setLoading(false);
+
+            }
+        };
+
+        fetchstylists();
+    }, []);
+
+    //fetch booking of selected stylist
     useEffect(() => {
         const fetchBookings = async () => {
             try {
+                if(!stylist) {
+                    console.log("No stylist",stylist)
+                    return};
                 const q = query(
                     collection(db, "bookings"),
-                    orderBy("createdAt", "desc")
+                    where("stylistId", "==", stylist.id)
+                    // orderBy("createdAt", "desc")
                 );
 
                 const snap = await getDocs(q);
@@ -43,16 +74,16 @@ function AdminBookings() {
                 }));
 
                 setBookings(data);
+                console.log("booking",data)
             } catch (err) {
                 console.error("Failed to fetch admin bookings", err);
             } finally {
                 setLoading(false);
-
             }
         };
 
         fetchBookings();
-    }, [bookings]);
+    }, [stylist]);
 
     // Mark complete  
     const markCompleted = async (booking) => {
@@ -108,8 +139,35 @@ function AdminBookings() {
     return (
         <div className="admin-bookings">
             <h2>All Bookings</h2>
+
+
+            {(
+                <section >
+                    <h3>Select Stylist</h3>
+
+                    <div className="stylists-grid">
+                        {stylists.map(st => (
+                            <div
+                                key={st.id}
+                                className={`stylist-card ${stylist?.id === st.id ? "active" : ""
+                                    }`}
+                                onClick={() => {
+                                    setStylist(st);
+                                    setStatusFilter("All")
+                                }}
+                            >
+                                <img src={st.photo} alt={st.name} />
+                                <p>{st.name}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                </section>
+            )
+            }
+
             {/* filter */}
-            <div className="admin-filters">
+            {stylist && <div className="admin-filters">
                 {bookingStatusArr.map(booking => (
                     <button
                         key={booking.status}
@@ -119,9 +177,9 @@ function AdminBookings() {
                         {booking.status} ({booking.count})
                     </button>
                 ))}
-            </div>
+            </div>}
 
-            <div className="admin-booking-list">
+            {stylist && <div className="admin-booking-list">
                 {filteredBookings.map(b => (
                     <div key={b.id} className="admin-booking-card">
                         <h4>{b.serviceName}</h4>
@@ -158,6 +216,7 @@ function AdminBookings() {
                     </div>
                 ))}
             </div>
+            }
         </div>
     );
 }
