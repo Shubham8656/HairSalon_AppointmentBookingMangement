@@ -48,7 +48,7 @@ function MyBookings() {
         <div className="booking-list">
           {bookings.map(b => (
             <div key={b.id} className="booking-card">
-              <h4>{b.serviceName}</h4>
+              <h3>{b.serviceName}</h3>
               <img
                 src={b.image}
                 alt={b.name}

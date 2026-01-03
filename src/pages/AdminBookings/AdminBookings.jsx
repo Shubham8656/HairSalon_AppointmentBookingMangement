@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
     collection,
     getDocs,
-    orderBy,
     query, doc, updateDoc, deleteDoc,
     where
 } from "firebase/firestore";
@@ -64,7 +63,6 @@ function AdminBookings() {
                 const q = query(
                     collection(db, "bookings"),
                     where("stylistId", "==", stylist.id)
-                    // orderBy("createdAt", "desc")
                 );
 
                 const snap = await getDocs(q);
