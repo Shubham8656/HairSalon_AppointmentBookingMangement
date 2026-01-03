@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
     collection, getDocs, query, where, addDoc,
-    doc,orderBy,
+    doc, orderBy,
     serverTimestamp,
     setDoc
 } from "firebase/firestore";
@@ -29,6 +29,9 @@ function BookingPage() {
     const [bookedSlots, setBookedSlots] = useState([]);
     const [slotsLoading, setSlotsLoading] = useState(false);
 
+    const stylistRef = useRef(null);
+    const dateTimeRef = useRef(null);
+    const TimeRef = useRef(null);
 
     /* 🔐 Protect page */
     useEffect(() => {
@@ -41,7 +44,7 @@ function BookingPage() {
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const snap = await getDocs(query(collection(db, "services"),orderBy("id", "asc")));
+                const snap = await getDocs(query(collection(db, "services"), orderBy("id", "asc")));
                 const data = snap.docs
                     .map(doc => ({ id: doc.id, ...doc.data() }))
                     .filter(s => s.active);
@@ -164,7 +167,7 @@ function BookingPage() {
                 date,
                 time,
                 status: "Pending",
-                image:service.image,
+                image: service.image,
                 createdAt: serverTimestamp(),
             };
 
@@ -217,6 +220,12 @@ function BookingPage() {
                                     setStylist(null);
                                     setDate(null);
                                     setTime(null);
+                                    setTimeout(() => {
+                                        stylistRef.current?.scrollIntoView({
+                                            behavior: "smooth",
+                                            block: "start",
+                                        });
+                                    }, 100);
                                 }}
                             >
                                 <img
@@ -235,7 +244,7 @@ function BookingPage() {
 
             {/* STEP 2: STYLIST (next step) */}
             {service && (
-                <section>
+                <section ref={stylistRef}>
                     <h3>Select Stylist</h3>
 
                     {stylistsLoading ? (
@@ -255,6 +264,12 @@ function BookingPage() {
                                         setStylist(st);
                                         setDate(null);
                                         setTime(null);
+                                        setTimeout(() => {
+                                            dateTimeRef.current?.scrollIntoView({
+                                                behavior: "smooth",
+                                                block: "start",
+                                            });
+                                        }, 100);
                                     }}
                                 >
                                     <img src={st.photo} alt={st.name} />
@@ -269,7 +284,7 @@ function BookingPage() {
 
             {/* STEP 3: DATE */}
             {stylist && (
-                <section>
+                <section ref={dateTimeRef}>
                     <h3>Select Date</h3>
 
                     <input
@@ -280,6 +295,12 @@ function BookingPage() {
                         onChange={(e) => {
                             setDate(e.target.value);
                             setTime(null);
+                            setTimeout(() => {
+                                TimeRef.current?.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "start",
+                                });
+                            }, 100);
                         }}
                     />
 
@@ -289,7 +310,7 @@ function BookingPage() {
 
             {/* STEP 4: TIME */}
             {date && stylist && service && (
-                <section>
+                <section ref={TimeRef}>
                     <h3>Select Time Slot</h3>
 
                     {slotsLoading ? (
