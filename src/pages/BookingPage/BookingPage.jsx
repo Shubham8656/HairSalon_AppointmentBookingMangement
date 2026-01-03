@@ -225,7 +225,7 @@ function BookingPage() {
                                             behavior: "smooth",
                                             block: "start",
                                         });
-                                    }, 100);
+                                    }, 200);
                                 }}
                             >
                                 <img
@@ -269,7 +269,7 @@ function BookingPage() {
                                                 behavior: "smooth",
                                                 block: "start",
                                             });
-                                        }, 100);
+                                        }, 200);
                                     }}
                                 >
                                     <img src={st.photo} alt={st.name} />
@@ -300,7 +300,7 @@ function BookingPage() {
                                     behavior: "smooth",
                                     block: "start",
                                 });
-                            }, 100);
+                            }, 300);
                         }}
                     />
 
