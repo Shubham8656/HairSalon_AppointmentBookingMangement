@@ -62,7 +62,7 @@ function Header() {
                 >
                   My Bookings
                 </Link>
-                <Link to="/admin/bookings" className="dropdown-link">
+                <Link to="/admin/bookings" className="dropdown-link" onClick={() => setOpen(false)}>
                   Admin Dashboard
                 </Link>
                 <button className="logout-btn" onClick={handleLogout}>
