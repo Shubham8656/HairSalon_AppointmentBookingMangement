@@ -1,5 +1,11 @@
 .my-bookings {
   padding: 30px;
+  background-image: url("https://images.unsplash.com/photo-1704311167385-e42095130238?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjM1fHxzYWxvbnxlbnwwfHwwfHx8MA%3D%3D");
+  background-color: wheat;
+  background-size: cover;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .booking-list {
@@ -9,16 +15,17 @@
 }
 
 .booking-card {
-  background: white;
+  background: rgb(255, 252, 246);
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 .booking-card h4 {
   color: #c2185b;
   margin-bottom: 8px;
 }
+
 /* status */
 .status {
   display: inline-block;

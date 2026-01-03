@@ -1,8 +1,21 @@
 /* Page */
 .booking-page {
   max-width: 900px;
-  margin: 30px auto;
+  /* margin: 30px auto; */
   padding: 20px;
+
+  /* background-image: url("https://images.unsplash.com/photo-1549236177-f9b0031756eb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTR8fHNhbG9ufGVufDB8fDB8fHww"); */
+  /* background-image: url("https://images.unsplash.com/photo-1595475884562-073c30d45670?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNhbG9ufGVufDB8fDB8fHww"); */
+  /* background-image: url("https://plus.unsplash.com/premium_photo-1664048712492-9d395c204e37?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNhbG9ufGVufDB8fDB8fHww"); */
+  /* background-image: url("https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODd8fHNhbG9ufGVufDB8fDB8fHww"); */
+  /* background-image: url("https://plus.unsplash.com/premium_photo-1671269943771-63db2ab54bf2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTd8fHNhbG9ufGVufDB8fDB8fHww"); */
+  background-image: url("https://images.unsplash.com/photo-1599387737838-660b75526801?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg2fHxzYWxvbnxlbnwwfHwwfHx8MA%3D%3D");
+  background-image: url("https://images.unsplash.com/photo-1704311167385-e42095130238?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjM1fHxzYWxvbnxlbnwwfHwwfHx8MA%3D%3D");
+  background-color: wheat;
+  background-size: cover;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .booking-page h2 {
@@ -17,6 +30,7 @@
 .booking-page h3 {
   margin-bottom: 14px;
   font-size: 18px;
+  /* background-color: white; */
 }
 
 /* Loading */

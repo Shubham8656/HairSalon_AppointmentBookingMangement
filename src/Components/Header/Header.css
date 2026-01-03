@@ -3,7 +3,7 @@
   top: 0;
   right: 0;
   z-index: 100;
-  background: white;
+  background: rgb(253, 251, 246);
   display: flex;
   justify-content: space-between;
   align-items: center;
