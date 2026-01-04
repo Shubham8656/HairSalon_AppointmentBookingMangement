@@ -1,4 +1,4 @@
-Demo - https://hairsalonappointmentbooking.netlify.app
+**Demo - https://hairsalonappointmentbooking.netlify.app**
 
 # Getting Started with Create React App
 
