@@ -9,6 +9,7 @@ import {
 import { db } from "../../firebase";
 import { AuthContext } from "../../context/AuthContext";
 import "./BookingPage.css";
+import emailjs from "emailjs-com";
 
 function BookingPage() {
     const { user, loading } = useContext(AuthContext);
@@ -202,7 +203,8 @@ function BookingPage() {
                 collection(db, "bookings"),
                 bookingData
             );
-
+            sendCustomerEmail(bookingData);
+            sendOwnerEmail(bookingData);
             // 2️⃣ Save under user
             await setDoc(
                 doc(db, "users", user.uid, "bookings", bookingRef.id),
@@ -222,7 +224,39 @@ function BookingPage() {
         }
     };
 
+    //send email to customer
+    const sendCustomerEmail = (booking) => {
+        emailjs.send(
+            "service_h225vg8", // SERVICE ID
+            "template_tvtthox", // TEMPLATE ID
+            {
+                customer_name: booking.userName,
+                customer_email: booking.userEmail,
+                service: booking.serviceName,
+                stylist: booking.stylistName,
+                date: booking.date,
+                time: booking.time,
+                salon_name: "My Salon",
+            },
+            "vksrFCn6FzHO5Vw_N" // PUBLIC KEY
+        );
+    };
 
+    //send email to owner
+    const sendOwnerEmail = (booking) => {
+        emailjs.send(
+            "service_h225vg8",
+            "template_wtqmwvq",
+            {
+                email: "shubhamvibhute1998@gmail.com",
+                customer_name: booking.userName,
+                service: booking.serviceName,
+                date: booking.date,
+                time: booking.time,
+            },
+            "vksrFCn6FzHO5Vw_N"
+        );
+    };
 
     return (
         <div className="booking-page">
