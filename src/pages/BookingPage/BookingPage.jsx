@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
     collection, getDocs, query, where, addDoc,
@@ -106,7 +106,7 @@ function BookingPage() {
                 const booked = snap.docs
                     .map(doc => doc.data())
                     .filter(b => b.status !== "Cancelled")
-                    .map(b => b.time); // VERY IMPORTANT
+                    .map(b => ({ time: b.time, duration: b.duration || 0 }));
 
                 setBookedSlots(booked);
             } catch (err) {
@@ -119,6 +119,32 @@ function BookingPage() {
 
         fetchBookedSlots();
     }, [stylist, date]);
+
+    // Compute unavailable slots based on existing bookings and their durations
+    const unavailableSlots = useMemo(() => {
+        const set = new Set();
+        if (!bookedSlots || !service) return set;
+
+        const slotDuration = service.duration; // minutes
+
+        bookedSlots.forEach(b => {
+            if (!b || !b.time) return;
+            const bookingDuration = b.duration || slotDuration;
+            const [h, m] = b.time.split(":").map(Number);
+            let current = new Date();
+            current.setHours(h, m, 0, 0);
+
+            const count = Math.max(1, Math.ceil(bookingDuration / slotDuration));
+            for (let i = 0; i < count; i++) {
+                const hh = current.getHours().toString().padStart(2, "0");
+                const mm = current.getMinutes().toString().padStart(2, "0");
+                set.add(`${hh}:${mm}`);
+                current = new Date(current.getTime() + slotDuration * 60000);
+            }
+        });
+
+        return set;
+    }, [bookedSlots, service]);
 
     if (loading || !user) {
         return <p className="page-loading">Checking login...</p>;
@@ -322,7 +348,7 @@ function BookingPage() {
                                 stylist.workingHours.end,
                                 service.duration
                             ).map(slot => {
-                                const isBooked = bookedSlots.includes(slot);
+                                const isBooked = unavailableSlots.has(slot);
 
                                 return (
                                     <button
