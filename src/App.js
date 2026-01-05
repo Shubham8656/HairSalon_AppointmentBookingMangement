@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import Header from "./Components/Header/Header";
 import Home from "./pages/Home/Home";
 import BookingPage from "./pages/BookingPage/BookingPage";
@@ -6,8 +7,11 @@ import Login from "./pages/Login/Login";
 import BookingSuccess from "./pages/BookingSuccess/BookingSuccess";
 import MyBooking from "./pages/MyBooking/MyBooking";
 import AdminBookings from "./pages/AdminBookings/AdminBookings";
-
+// import { migrateServices } from "./migration";
 function App() {
+  useEffect(() => {
+    // migrateServices();
+  }, []);
   return (
     <BrowserRouter>
       <Header />
