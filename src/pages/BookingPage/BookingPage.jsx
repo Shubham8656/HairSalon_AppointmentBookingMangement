@@ -384,22 +384,35 @@ function BookingPage() {
                             ).map(slot => {
                                 const isBooked = unavailableSlots.has(slot);
 
+                                // Disable slot if it's in the past (based on selected date) or already booked
+                                let isPast = false;
+                                if (date) {
+                                    const [slotH, slotM] = slot.split(":").map(Number);
+                                    const [y, mo, d] = date.split("-").map(Number);
+                                    const slotDateTime = new Date(y, mo - 1, d, slotH, slotM, 0, 0);
+                                    isPast = slotDateTime.getTime() <= new Date().getTime();
+                                }
+
+                                const disabled = isBooked || isPast;
+
                                 return (
                                     <button
                                         key={slot}
-                                        disabled={isBooked}
+                                        disabled={disabled}
                                         className={`time-slot
                                                     ${time === slot ? "active" : ""}
-                                                    ${isBooked ? "disabled" : ""}
+                                                    ${disabled ? "disabled" : ""}
                                                 `}
                                         onClick={() => {
-                                            !isBooked && setTime(slot)
-                                            setTimeout(() => {
-                                                confirmBookRef.current?.scrollIntoView({
-                                                    behavior: "smooth",
-                                                    block: "start",
-                                                });
-                                            }, 200);
+                                            if (!disabled) {
+                                                setTime(slot)
+                                                setTimeout(() => {
+                                                    confirmBookRef.current?.scrollIntoView({
+                                                        behavior: "smooth",
+                                                        block: "start",
+                                                    });
+                                                }, 200);
+                                            }
                                         }}
                                     >
                                         {slot}

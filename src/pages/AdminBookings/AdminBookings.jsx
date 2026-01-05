@@ -132,6 +132,26 @@ function AdminBookings() {
         }
     };
 
+
+    // //send cancellation email to customer
+    // const sendCustomerEmail = (booking) => {
+    //     emailjs.send(
+    //         "service_h225vg8", // SERVICE ID
+    //         "template_tvtthox", // TEMPLATE ID
+    //         {
+    //             customer_name: booking.userName,
+    //             customer_email: booking.userEmail,
+    //             service: booking.serviceName,
+    //             stylist: booking.stylistName,
+    //             date: booking.date,
+    //             time: booking.time,
+    //             salon_name: "My Salon",
+    //         },
+    //         "vksrFCn6FzHO5Vw_N" // PUBLIC KEY
+    //     );
+    // };
+
+
     if (loading) return <p style={{ padding: 20 }}>Loading bookings...</p>;
 
     return (
