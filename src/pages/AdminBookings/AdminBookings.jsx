@@ -3,7 +3,7 @@ import {
     collection,
     getDocs,
     query, doc, updateDoc, deleteDoc,
-    where
+    where,orderBy
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import "./AdminBookings.css";
@@ -62,7 +62,10 @@ function AdminBookings() {
                     return};
                 const q = query(
                     collection(db, "bookings"),
+                    orderBy("date", "desc"), 
+                    orderBy("time", "desc"),
                     where("stylistId", "==", stylist.id)
+                    
                 );
 
                 const snap = await getDocs(q);
